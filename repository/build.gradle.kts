@@ -33,8 +33,8 @@ dependencies {
     //std lib
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     //app libs
-    AppDependencies.appLibraries
+    implementation(AppDependencies.appLibraries)
     //test libs
-    AppDependencies.testLibraries
-    AppDependencies.androidTestLibraries
+    testImplementation(AppDependencies.testLibraries)
+    androidTestImplementation(AppDependencies.androidTestLibraries)
 }

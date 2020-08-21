@@ -27,14 +27,39 @@ android {
             )
         }
     }
+
+    flavorDimensions(AppConfig.dimension)
+    productFlavors {
+        create("staging") {
+            applicationIdSuffix = ".staging"
+            setDimension(AppConfig.dimension)
+        }
+
+        create("production") {
+            setDimension(AppConfig.dimension)
+        }
+    }
+
+    viewBinding {
+        android.buildFeatures.viewBinding = true
+    }
+
+    packagingOptions {
+        exclude("META-INF/notice.txt")
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     //std lib
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     //app libs
-    AppDependencies.appLibraries
+    implementation(AppDependencies.appLibraries)
     //test libs
-    AppDependencies.testLibraries
-    AppDependencies.androidTestLibraries
+    testImplementation(AppDependencies.testLibraries)
+    androidTestImplementation(AppDependencies.androidTestLibraries)
 }
